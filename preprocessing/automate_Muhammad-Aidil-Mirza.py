@@ -56,7 +56,10 @@ if __name__ == "__main__":
     X = df.drop('Outcome', axis=1)
     y = df['Outcome']
     
+    df_preprocessed = pd.DataFrame(X, columns=X.columns)
+    df_preprocessed['Outcome'] = y.reset_index(drop=True)
+    
     X_train, X_test, y_train, y_test = split_data(X, y)
     
     processed_data_path = './preprocessing/diabetes_preprocessing.csv' 
-    save_preprocessed_data(X, processed_data_path)
+    save_preprocessed_data(df_preprocessed, processed_data_path)
