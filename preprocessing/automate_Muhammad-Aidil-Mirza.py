@@ -37,6 +37,7 @@ def preprocess_data(df):
     print(f"Jumlah outlier yang terdeteksi: {len(all_outliers)}")
 
     df.drop(index=all_outliers, inplace=True)
+    df = df.reset_index(drop=True)
 
     return df
 
@@ -56,8 +57,7 @@ if __name__ == "__main__":
     X = df.drop('Outcome', axis=1)
     y = df['Outcome']
     
-    df_preprocessed = pd.DataFrame(X, columns=X.columns)
-    df_preprocessed['Outcome'] = y.reset_index(drop=True)
+    df_preprocessed = df.copy()
     
     X_train, X_test, y_train, y_test = split_data(X, y)
     
